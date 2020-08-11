@@ -1,0 +1,11 @@
+{% extends 'content.html' %}
+{% load static %}
+
+{% block content %}
+    <p>
+        You should be logged to see that page
+    </p>
+    <p>
+        <a href="{% url 'login' %}">Log in</a>
+    </p>
+{% endblock %}

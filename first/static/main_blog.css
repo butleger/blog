@@ -1,0 +1,255 @@
+*
+{
+    box-sizing: border-box;
+    margin : 0px;
+    padding : 0px;
+}
+
+body
+{
+    background-color: #1e1e29;
+    margin : 0px;
+}
+
+.header_wrapper
+{
+    background-color:  rgba(54, 54, 80, 0.74);
+    min-height: 10%;
+    width : 100%;
+    text-align: center;
+    position: sticky;
+}
+
+.header_ref_wrapper
+{
+    display: inline-block;
+    margin : auto 5px auto 5px;
+    padding : 3px;
+    color: #1faa55;
+    transition : all 0.2s;
+}
+
+.header_ref_wrapper:hover
+{
+    background-color:  rgba(102, 102, 134, 0.74);
+    cursor : pointer;
+}
+
+.header_ref_wrapper a,.header_ref_wrapper a:visited,.header_ref_wrapper a:active
+{
+    color: #1faa55;
+    text-decoration: none;
+}
+
+.header_text
+{
+
+}
+
+.auth
+{
+    padding : 3px;
+    padding-left : 5px;
+    float : right;
+    border-radius : 3px;
+}
+.auth:hover
+{
+    background-color:  rgba(102, 102, 134, 0.74);
+}
+
+.login_nav_wrapper
+{
+
+}
+
+.login_nav
+{
+
+}
+
+login_nav *
+{
+    text-decoration : none;
+    color : #1faa55;
+}
+
+.user_name
+{
+
+}
+
+.log_out_nav
+{
+
+}
+
+.log_out_nav_ref
+{
+}
+
+.login_ref_wrapper
+{
+
+}
+
+.login_ref
+{
+    text-decoration : none;
+    color : #1faa55;
+}
+
+
+.content_wrapper
+{
+    text-align: center;
+}
+
+.content
+{
+    margin : auto;
+    background-color: #3b5151;
+    width : 80%;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top : 10px;
+    padding-bottom : 10px;
+}
+
+.article, .solo_article
+{
+    color: #ccd9d7;
+    padding : 10px;
+    margin : 10px;
+    background-color: #032a44;
+    word-wrap: break-word;
+    border-radius : 3px;
+    transition: all 0.2s;
+}
+
+.article_title
+{
+
+}
+
+.article_text
+{
+
+}
+
+.article_date
+{
+
+}
+
+.solo_article
+{
+    margin-bottom : 0px;
+    text-align: left;
+}
+
+.article:hover
+{
+    cursor : pointer;
+    background-color : #275f85;
+    transform : scale(1.02, 1.1 );
+}
+
+textarea
+{
+    border-radius : 10px;
+    padding : 5px;
+}
+
+input
+{
+    border-radius: 3px;
+    padding : 5px;
+}
+
+input[type=submit]
+{
+    display : inline;
+    margin : auto;
+}
+
+.comments
+{
+    margin : 10px;
+    color : #0b1013;
+    background-color: #24625c;
+    border-radius: 5px;
+    margin-top: 0px;
+}
+
+.comment
+{
+    text-align: left;
+    padding : 10px;
+}
+
+.comment_header
+{
+    line-height: 1em;
+    font-size : 1.2em;
+}
+
+.like_button
+{
+    height : 20px;
+    width : 20px;
+}
+
+.about_me_text
+{
+
+}
+
+.contacts_text
+{
+
+}
+
+.my_resources_text
+{
+
+}
+
+.my_works_text
+{
+
+}
+
+.footer_wrapper
+{
+    text-align: center;
+}
+
+.footer
+{
+    margin : auto;
+    background-color: rgb(17, 17, 22);
+    text-align: center;
+}
+
+.footer_element
+{
+    margin : 10px;
+    color : #032a44;
+    padding : 3px;
+    border-radius: 2px;
+    display: inline-block;
+    background-color: rgba(71, 217, 71, 0.59);
+    height: 100%;
+}
+
+.footer_title
+{
+    font-size : 1.1em;
+}
+
+.footer_text
+{
+
+}

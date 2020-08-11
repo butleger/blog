@@ -1,0 +1,22 @@
+{% extends 'content.html' %}
+{% load static %}
+
+{% block content %}
+                {% for article in articles %}
+                <div id="{{ article.title }}" class="article">
+                    <p class="article_title">{{ article.title }}</p>
+                    <p class="article_text">{{ article.text|safe }}</p>
+                    <p class="article_date">{{ article.date }}</p>
+                </div>
+                <script>
+                    addEventListener("DOMContentLoaded", () => {
+                        let article = document.getElementById("{{ article.title }}")
+                        article.addEventListener("click", () => {
+                            window.location.replace('{% url 'articles:solo_article' article.id %}')
+                        })
+                    })
+                </script>
+                {% empty %}
+                <div>There is no articles :( </div>
+                {% endfor %}
+{% endblock %}

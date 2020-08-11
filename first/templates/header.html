@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+        <link rel="stylesheet" href="{% static 'main_blog.css' %}">
+{% endblock %}
+
+{% block header %}
+        <div class="header_wrapper">
+            {% for ref in menu %}
+            <div id="{{ ref.ref }}" class="header_ref_wrapper">
+                <script>
+                    navigateButton = document.getElementById('{{ ref.ref }}')
+                    navigateButton.addEventListener('click', () =>{
+                        {% if ref.ref == 'articles' %}
+                        document.location.replace('{% url "articles:base_page" %}')
+                        {% else %}
+                        document.location.replace('{% url "articles:base_page" %}' + '{{ ref.ref }}')
+                        {% endif %}
+                    })
+                </script>
+                <span class="header_text">{{ ref.text }}</span>
+            </div>
+            {% endfor %}
+            <div class="auth">
+              {% if user.is_authenticated %}
+                <div class="login_nav_wrapper">
+                    <ul class="login_nav">
+                        <li class="user_name">{{ user.get_username }}</li>
+                        <li class="log_out_nav"><a class="log_out_nav_ref" href="{% url 'logout' %}">Log out</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="login_ref_wrapper">
+                    <a class="login_ref" href="{% url 'login' %}">Log in</a>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+{% endblock %}

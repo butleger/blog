@@ -1,0 +1,13 @@
+{% extends 'registration/registration_base.html' %}
+{% load static %}
+
+{% block registration_content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ create_user_form.as_p }}
+    <input type="submit" value="Sign in">
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'content.html' %}
+{% load static %}
+{% block content %}
+<div class="solo_article">
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.text|safe }}</p>
+    <p>likes: {{ article.likes }}</p>
+</div>
+<div class="comments">
+    {% for comment in comments %}
+    <hr>
+    <div class="comment">
+        <p>{{ comment.author }} <span class="comment_date"> {{ comment.date }}</span> :</p>
+        <span>{{ comment.text }}</span>
+        <span id="likes_{{ comment.id }}">likes: {{ comment.likes }}</span><button id="{{ comment.id }}" class="like_button" value="like"></button>
+        <script>
+            likeButton = document.getElementById("{{ comment.id }}")
+            likeButton.addEventListener("click", () => {
+                request = new XMLHttpRequest()
+                request.open('GET', "{% url 'articles:solo_article' article.id %}" + 'likes?id={{ comment.id }}')
+                request.setRequestHeader('Content-Type', 'application/x-www-form-url')
+                request.addEventListener("readystatechange", () => {
+                    if( request.readyState === 4 && request.status === 200 )
+                    {
+                        let likes = document.getElementById("likes_{{ comment.id }}")
+                        likes.innerHTML =  "likes: " + (parseInt(likes.innerHTML.split(" ")[1], 10) + 1)
+                    }
+                });
+                request.send()
+            })
+        </script>
+    </div>
+    <hr>
+    {% empty %}
+    <p class="no_comments">Here is no comments!</p>
+    {% endfor %}
+    <form method="POST" >
+        {% csrf_token %}
+        <table>
+            {{ comment_form }}
+        </table>
+        <input type="submit" value="send" onclick="windows.location.reload()">
+    </form>
+</div>
+{% endblock %}

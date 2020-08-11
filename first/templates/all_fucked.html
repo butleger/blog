@@ -1,0 +1,8 @@
+{% extends 'content.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Get Exception in {{ errorBlock }}</h2>
+<p>message : {{ arg }}</p>
+<p>special message:{{ specialMessage }}</p>
+{% endblock %}

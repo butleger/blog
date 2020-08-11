@@ -1,0 +1,21 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block footer %}
+        <div class="footer_wrapper">
+            <div class="footer">
+                {% for ind,footerBlock in footer.items %}
+                <div class="footer_element">
+                    <div class="footer_title_wrapper">
+                        <span class="footer_title">{{ footerBlock.name }}</span>
+                    </div>
+                {% for footerString in footerBlock.content %}
+                    <div class="footer_text_wrapper">
+                        <span class="footer_text">{{ footerString.text }}</span>
+                    </div>
+                {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}
