@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'articles.apps.ArticlesConfig',
+    'accounts.apps.AccountsConfig',
     'tinymce',
     'ckeditor',
 ]
@@ -52,12 +53,13 @@ MIDDLEWARE = [
 ]
 
 
+LOGIN_URL = 'articles:not_logged'
 LOGIN_REDIRECT_URL = 'articles:base_page'
 LOGOUT_REDIRECT_URL = 'articles:base_page'
+REDIRECT_FIELD_NAME = 'articles/not_logged'
 
 ROOT_URLCONF = 'first.urls'
 
-REDIRECT_FIELD_NAME = 'articles/not_logged'
 
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 

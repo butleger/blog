@@ -5,7 +5,9 @@
                 {% for article in articles %}
                 <div id="{{ article.title }}" class="article">
                     <p class="article_title">{{ article.title }}</p>
-                    <p class="article_text">{{ article.text|safe }}</p>
+                    {% with article_text=article.text|safe %}
+                    <p class="article_text">{{ article_text|truncatechars:10 }}</p>
+                    {% endwith %}
                     <p class="article_date">{{ article.date }}</p>
                 </div>
                 <script>

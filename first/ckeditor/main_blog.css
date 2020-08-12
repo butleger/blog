@@ -46,6 +46,60 @@ body
 
 }
 
+.auth
+{
+    padding : 3px;
+    padding-left : 5px;
+    float : right;
+    border-radius : 3px;
+}
+.auth:hover
+{
+    background-color:  rgba(102, 102, 134, 0.74);
+}
+
+.login_nav_wrapper
+{
+
+}
+
+.login_nav
+{
+
+}
+
+login_nav *
+{
+    text-decoration : none;
+    color : #1faa55;
+}
+
+.user_name
+{
+
+}
+
+.log_out_nav
+{
+
+}
+
+.log_out_nav_ref
+{
+}
+
+.login_ref_wrapper
+{
+
+}
+
+.login_ref
+{
+    text-decoration : none;
+    color : #1faa55;
+}
+
+
 .content_wrapper
 {
     text-align: center;
@@ -99,6 +153,25 @@ body
 {
     cursor : pointer;
     background-color : #275f85;
+    transform : scale(1.02, 1.1 );
+}
+
+textarea
+{
+    border-radius : 10px;
+    padding : 5px;
+}
+
+input
+{
+    border-radius: 3px;
+    padding : 5px;
+}
+
+input[type=submit]
+{
+    display : inline;
+    margin : auto;
 }
 
 .comments
@@ -168,9 +241,43 @@ body
     border-radius: 2px;
     display: inline-block;
     background-color: rgba(71, 217, 71, 0.59);
+    height: 100%;
+}
+
+.footer_title
+{
+    font-size : 1.1em;
 }
 
 .footer_text
 {
 
+}
+
+.registrate_ref_wrapper
+{
+    padding : 5px;
+}
+
+.registrate_ref
+{
+    text-decoration : none;
+    border-radius : 3px;
+    background-color : green;
+    color : black;
+}
+
+.registrate_ref:hover
+{
+    background-color : white;
+}
+
+.register_form
+{
+    margin : auto;
+}
+
+.login_form_wrapper
+{
+    margin : auto;
 }

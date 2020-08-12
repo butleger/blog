@@ -27,12 +27,12 @@
                 <div class="login_nav_wrapper">
                     <ul class="login_nav">
                         <li class="user_name">{{ user.get_username }}</li>
-                        <li class="log_out_nav"><a class="log_out_nav_ref" href="{% url 'logout' %}">Log out</a></li>
+                        <li class="log_out_nav"><a class="log_out_nav_ref" href="{% url 'accounts:logout' %}">Log out</a></li>
                     </ul>
                 </div>
                 {% else %}
                 <div class="login_ref_wrapper">
-                    <a class="login_ref" href="{% url 'login' %}">Log in</a>
+                    <a class="login_ref" href="{% url 'accounts:login' %}">Log in</a>
                 </div>
             {% endif %}
             </div>

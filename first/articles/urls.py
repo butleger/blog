@@ -12,7 +12,6 @@ urlpatterns = [
     path('my_resources', views.my_resources, name='my_resources'),
     path('contacts', views.contacts, name='contacts'),
     path('articles', views.badRedirect, name='bad_redirect'),
-    path('sign_in',views.registrate, name='register_user' ),
     path('not_logged', views.shouldBeLogged, name='not_logged'),
     path('<articleId>', views.sendArticle, name='solo_article'),
 ]

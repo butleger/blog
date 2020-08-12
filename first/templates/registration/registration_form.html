@@ -3,9 +3,28 @@
 
 {% block registration_content %}
 
+{% if create_user_form.errors %}
+<div class="errors">
+    <p class="erors_messages"> {{ create_user_form.errors }} </p>
+</div>
+{% endif %}
+
 <form method="POST">
     {% csrf_token %}
-    {{ create_user_form.as_p }}
+    <table class="register_form">
+        <tr>
+            <td>Username</td>
+            <td>{{ create_user_form.username }}</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>{{ create_user_form.password1 }}</td>
+        </tr>
+        <tr>
+            <td>Confirm</td>
+            <td>{{ create_user_form.password2 }}</td>
+        </tr>
+    </table>
     <input type="submit" value="Sign in">
 </form>
 

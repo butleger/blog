@@ -253,3 +253,31 @@ input[type=submit]
 {
 
 }
+
+.registrate_ref_wrapper
+{
+    padding : 5px;
+}
+
+.registrate_ref
+{
+    text-decoration : none;
+    border-radius : 3px;
+    background-color : green;
+    color : black;
+}
+
+.registrate_ref:hover
+{
+    background-color : white;
+}
+
+.register_form
+{
+    margin : auto;
+}
+
+.login_form_wrapper
+{
+    display : inline-block;
+}

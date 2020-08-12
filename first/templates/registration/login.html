@@ -2,24 +2,17 @@
 {% load static %}
 
 {% block registration_content %}
-     <div class="content_wrapper">
-            <div class="content">
                 {% if form.errors %}
-                    <p>Your username and password didn`t match. Please try again </p>
+                    {% for key,error in form.errors.items %}
+                    <div class="login_errors_wrapper">
+                        <span class="login_errors">
+                            {{ error }}
+                        </span>
+                    </div>
+                    {% endfor %}
                 {% endif %}
-
-                {% if next %}
-                    {% if user.is_authenticated %}
-                        <p>Your account doesn't have access to this page. To proceed,
-                            please login with an account that has access.</p>
-                    {% else %}
-                        <p>
-                            Please Log in
-                        </p>
-                    {% endif %}
-                {% endif %}
-
-                <form method="POST" action="{% url 'login' %}">
+            <div class="login_form_wrapper">
+                <form method="POST">
                     {% csrf_token %}
                     <table>
                         <tr>
@@ -42,7 +35,8 @@
                     <input type="submit" value="login">
                     <input type="hidden" name="next" value="next">
                 </form>
-                <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+                <div class="registrate_ref_wrapper">
+                    <a class="registrate_ref" href="{% url 'accounts:register_user' %}">Registrate</a>
+                </div>
             </div>
-        </div>
 {% endblock %}
