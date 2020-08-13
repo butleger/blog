@@ -1,22 +1,95 @@
-from django.shortcuts import render, redirect
-from django.http import (HttpResponse,
-                         HttpResponseNotFound,
-                         HttpResponsePermanentRedirect,
-                         HttpResponseRedirect)
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, UserModel
-from .forms import AddArticleForm, AddCommentForm
-from .models import ArticleModel, CommentModel, MainMenuElementModel
-from .exceptions import *
-from .db_getters import *
 import datetime
+from .db_getters import *
+from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from .forms import AddArticleForm, AddCommentForm
+from django.utils.decorators import classonlymethod
+from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponse, HttpResponseRedirect
 
 
-def articles(request):
-    footer = getFooter()
-    menu = getMenu()
-    outArticles = getAllArticles()
-    return render(request, 'navigate_menu\\articles.html', {'articles': outArticles, 'menu': menu, 'footer': footer})
+class BaseAjaxWorker(TemplateView):
+    response_class = HttpResponse
+    data = 'unused data'
+
+    def post(self):
+        return HttpResponse(self.data)
+
+class BaseBlogView(TemplateView):
+    #should define template_name in next classes
+    template_name = 'navigate_menu\\articles.html'
+    base_context = {
+        'footer': getFooter(),
+        'menu': getMenu(),
+    }
+
+    def get_context_data(self, **kwargs):
+        if self.base_context is not None:
+            self.extra_context.update(**self.base_context)
+        return super().get_context_data(**kwargs)
+
+
+class ArticlesView(BaseBlogView):
+    template_name = 'navigate_menu\\articles.html'
+
+    extra_context = {
+        'articles': getAllArticles(),
+    }
+
+
+class AboutMeView(BaseBlogView):
+    template_name = 'navigate_menu\\about_me.html'
+
+    extra_context = {
+        'text': getSingleArticleByName('About me').text
+    }
+
+
+class ContactsView(BaseBlogView):
+    template_name = 'navigate_menu\\contacts.html'
+
+    extra_context = {
+        'text': getSingleArticleByName('Contacts').text
+    }
+
+
+class MyResourcesView(BaseBlogView):
+    template_name = 'navigate_menu\\my_resources.html'
+
+    extra_context = {
+        'text': getSingleArticleByName('My resources').text
+    }
+
+
+class MyWorksView(BaseBlogView):
+    template_name = 'navigate_menu\\my_works.html'
+
+    extra_context = {
+        'text': getSingleArticleByName('My works').text
+    }
+
+
+class ArticleView(BaseBlogView):
+    #article and comments will cant be getted,cause depends from view arguments
+    #so it will be define in next functions
+    comments = None
+    article = None
+    comment_form = AddCommentForm
+    template_name = 'article.html'
+
+    extra_context = {
+        'comment_form': comment_form(),
+    }
+
+    #added more context that depends from url in setup
+    def get_context_data(self, **kwargs):
+        self.extra_context.update(article=self.article)
+        self.extra_context.update(comments=getCommentsByArticle(self.article))
+        return super().get_context_data(**kwargs)
+
+    def setup(self, request, *args, **kwargs):
+        self.article = getArticleById(int(kwargs['articleId']))
+        return super().setup(request, *args, **kwargs)
 
 
 def addLike(request, id):
@@ -42,7 +115,7 @@ def sendArticle(request, articleId):
             _article = getArticleById(articleId)
         except CustomException as ex:
             pass
-        else :
+        else:
             comment.article = _article
             comment.save()
     menu = getMenu()
@@ -56,29 +129,6 @@ def sendArticle(request, articleId):
                                             'footer': footer})
 
 
-@login_required
-def about_me(request):
-    menu = getMenu()
-    footer = getFooter()
-    return render(request, 'navigate_menu\\about_me.html', {'menu': menu, 'footer': footer})
-
-
-def contacts(request):
-    menu = getMenu()
-    footer = getFooter()
-    return render(request, 'navigate_menu\\contacts.html', {'menu': menu, 'footer':footer})
-
-
-def my_resources(request):
-    menu = getMenu()
-    footer = getFooter()
-    return render(request, 'navigate_menu\\my_resources.html', {'menu': menu, 'footer': footer})
-
-def my_works(request):
-    menu = getMenu()
-    footer = getFooter()
-    return render(request, 'navigate_menu\\my_works.html', {'menu': menu,
-                                                            'footer': footer,})
 
 def add_comment(request, id):
     if request.method == 'POST':
@@ -100,7 +150,8 @@ def add_comment(request, id):
 
 
 def badRedirect(request):
-    return redirect('article')
+    print(request.session.items())
+    return redirect('articles:base_page')
 
 
 def shouldBeLogged(request):

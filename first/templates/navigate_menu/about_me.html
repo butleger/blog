@@ -3,18 +3,6 @@
 
 {% block content %}
     <p class="about_me_text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum sit amet felis convallis dapibus at non metus. Donec sit amet ultricies tortor. Phasellus in orci in diam vehicula rutrum. Quisque nec pellentesque leo, et venenatis leo. Etiam pharetra velit ut lectus laoreet, nec condimentum dolor mattis. Vivamus vel velit eu nisl ullamcorper luctus. Aliquam commodo id risus id auctor. Donec mollis ligula vel elit tempus, at maximus nulla condimentum. Nullam vitae odio odio. Pellentesque pharetra nunc et dui pretium imperdiet. Phasellus efficitur ex posuere justo scelerisque luctus. Donec diam ex, interdum sit amet ligula in, dignissim convallis tellus. Integer nec purus orci.
-        Integer nulla nulla, mattis eu neque eu, sollicitudin elementum risus. Nunc commodo quis neque non egestas. Integer ac mi arcu. Nunc id dapibus dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc ultrices, lacus vel mollis iaculis, sapien massa ornare velit, non aliquam tellus lacus non magna. In hac habitasse platea dictumst.
-        Vestibulum consectetur urna sollicitudin eros hendrerit placerat. Vivamus porttitor arcu tristique rutrum rutrum. Phasellus viverra ullamcorper nisi eget finibus. Nunc vitae tellus erat. Quisque id est sodales, feugiat mauris id, ornare orci. In non maximus diam, sit amet fringilla ante. Donec ut volutpat mauris. Donec vel nisl lectus. Cras congue, est in volutpat porta, diam tortor ullamcorper mi, tristique aliquet odio quam quis erat. Integer ornare pellentesque nisl id tempus.
-            Proin ac diam non est aliquet facilisis ac vitae neque.
-        Integer dolor purus, pulvinar at enim sagittis, aliquet convallis libero. Donec purus nibh, hendrerit ac iaculis quis, posuere et enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur ultricies elit bibendum est tincidunt, ut cursus nunc convallis. Sed eu eros in libero maximus imperdiet. Fusce ac urna molestie, aliquam sapien id, interdum magna. Quisque eu nibh pulvinar, accumsan libero sit amet, tincidunt ex. Suspendisse potenti. Cras varius eros a arcu volutpat luctus. Pellentesque fringilla sapien quam, ullamcorper congue magna interdum at. Praesent commodo diam elit, vel lacinia metus posuere bibendum.
-        Praesent mollis volutpat sem, quis elementum orci volutpat id. Donec non bibendum libero, in feugiat mauris. Suspendisse vitae tincidunt diam, vel tempus nisi. Nullam vestibulum risus tincidunt elementum efficitur. Phasellus faucibus venenatis diam, vitae eleifend massa efficitur id. Suspendisse mi ex, venenatis sed urna fringilla, iaculis feugiat augue. Aenean bibendum, erat eget mattis egestas, tortor tortor facilisis felis, tincidunt posuere tortor tortor sit amet tortor. Nam vitae pulvinar massa. Aliquam erat volutpat.
+        {{ text|safe }}
     </p>
-
-        <p>{{ user.get_username }}</p>
-        <p><a href="{% url 'accounts:logout' %}">Log out</a></p>
-
-    <p>{{ user.is_authenticated }}</p>
-    <p>{{ user.get_username }}</p>
-
 {% endblock %}

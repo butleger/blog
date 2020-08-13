@@ -107,6 +107,7 @@ login_nav *
 
 .content
 {
+    word-wrap : break-word;
     margin : auto;
     background-color: #3b5151;
     width : 80%;

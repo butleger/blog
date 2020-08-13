@@ -3,7 +3,7 @@
 
 {% block content %}
                 {% for article in articles %}
-                <div id="{{ article.title }}" class="article">
+                <div id="{{ article.id }}" class="article">
                     <p class="article_title">{{ article.title }}</p>
                     {% with article_text=article.text|safe %}
                     <p class="article_text">{{ article_text|truncatechars:10 }}</p>
@@ -12,7 +12,7 @@
                 </div>
                 <script>
                     addEventListener("DOMContentLoaded", () => {
-                        let article = document.getElementById("{{ article.title }}")
+                        let article = document.getElementById("{{ article.id }}")
                         article.addEventListener("click", () => {
                             window.location.replace('{% url 'articles:solo_article' article.id %}')
                         })

@@ -9,7 +9,7 @@ from django.urls import reverse
 
 
 class MyLoginView(LoginView):
-    redirect_authenticated_user_template = 'accounts:success_login'
+    success_redirect_template = 'accounts:success_login'
     template_name = 'registration\\login.html'
     extra_context = {
         'menu': getMenu(),
@@ -17,31 +17,15 @@ class MyLoginView(LoginView):
     }
 
     def get_redirect_url(self):
-        return reverse(self.redirect_authenticated_user)
+        return reverse(self.success_redirect_template)
 
-def log_in(request):
-    menu = getMenu()
-    footer = getFooter()
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return render(request, 'registration\\success_login.html', {'menu': menu,
-                                                                        'footer': footer})
-        else:
-            error = 'There is no user with such password and name'
-            return render(request, 'registration\\login.html', {'menu': menu,
-                                                                'footer': footer,
-                                                                'form': form,
-                                                                'errors': error})
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration\\login.html', {'menu': menu,
-                                                            'footer': footer,
-                                                            'form': form})
+
+class MySuccessLoginView(TemplateView):
+    template_name = 'registration\\success_login.html'
+    extra_context = {
+        'menu': getMenu(),
+        'footer': getFooter()
+    }
 
 
 class MyLogoutView(LogoutView):
@@ -71,4 +55,27 @@ def registrate(request):
                                                                         'menu': menu,
                                                                         'footer': footer})
 
+def log_in(request):
+    menu = getMenu()
+    footer = getFooter()
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'registration\\success_login.html', {'menu': menu,
+                                                                        'footer': footer})
+        else:
+            error = 'There is no user with such password and name'
+            return render(request, 'registration\\login.html', {'menu': menu,
+                                                                'footer': footer,
+                                                                'form': form,
+                                                                'errors': error})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'registration\\login.html', {'menu': menu,
+                                                            'footer': footer,
+                                                            'form': form})
 # Create your views here.

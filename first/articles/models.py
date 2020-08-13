@@ -5,8 +5,7 @@ from ckeditor.fields import RichTextField
 
 class CategoryModel(models.Model):
     name = models.CharField(max_length=20,
-                            default='Other',
-                            unique=True)
+                            default='Other')
 
     # make default value for article
     OTHER_CATEGORY_ID = 1
@@ -98,4 +97,15 @@ class FooterContentModel(models.Model):
     def __str__(self):
         return self.text
 
+
+class SingleArticleModel(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+    text = RichTextField()
+
+    class Meta:
+        verbose_name_plural = 'Одиночные статьи'
+        verbose_name = 'Одиночные статьи'
+
+    def __str__(self):
+        return self.name
 # Create your models here.

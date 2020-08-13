@@ -5,13 +5,14 @@ from django.urls import include
 
 app_name = 'articles'
 urlpatterns = [
-    path('', views.articles, name='base_page'),
+    path('', views.ArticlesView.as_view(), name='base_page'),
+    path('test', views.BaseAjaxWorker.as_view(), name='test'),
     path('<id>/likes', views.addLike, name='service_add_like'),
-    path('about_me', views.about_me, name='about_me'),
-    path('my_works', views.my_works, name='my_works'),
-    path('my_resources', views.my_resources, name='my_resources'),
-    path('contacts', views.contacts, name='contacts'),
+    path('about_me', views.AboutMeView.as_view(), name='about_me'),
+    path('my_works', views.MyWorksView.as_view(), name='my_works'),
+    path('my_resources', views.MyResourcesView.as_view(), name='my_resources'),
+    path('contacts', views.ContactsView.as_view(), name='contacts'),
     path('articles', views.badRedirect, name='bad_redirect'),
     path('not_logged', views.shouldBeLogged, name='not_logged'),
-    path('<articleId>', views.sendArticle, name='solo_article'),
+    path('<int:articleId>', views.ArticleView.as_view(), name='solo_article'),
 ]

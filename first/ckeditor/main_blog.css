@@ -103,6 +103,7 @@ login_nav *
 .content_wrapper
 {
     text-align: center;
+    word-wrap : break-word;
 }
 
 .content

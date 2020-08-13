@@ -7,7 +7,7 @@ class CustomException(Exception):
     specialMessage = ""
 
     def __init__(self, message="No message"):
-        specialMessage = message
+        self.specialMessage = message
 
 class CantGetMenu(exceptions.ObjectDoesNotExist, CustomException):
     message = "database have not menu"
@@ -23,6 +23,15 @@ class CantGetFooter(exceptions.ObjectDoesNotExist, CustomException):
 
     def __str__(self):
         return self.message
+
+
+class NoFooter(exceptions.ObjectDoesNotExist, CustomException):
+    message = 'No Footer Content'
+    errorBlock = 'Footer'
+
+    def __str__(self):
+        return self.message
+
 
 class ManyArticles(exceptions.MultipleObjectsReturned, CustomException):
     message = "in database more than 1 article with this title"
@@ -64,13 +73,20 @@ class ManyComments(exceptions.MultipleObjectsReturned, CustomException):
         return self.message
 
 
-class NoFooter(exceptions.ObjectDoesNotExist, CustomException):
-    message = 'No Footer Content'
-    errorBlock = 'Footer'
+class ManySingleArticles(exceptions.MultipleObjectsReturned, CustomException):
+    message = 'Get more than 1 single article'
+    errorBlock = 'single article getter'
 
     def __str__(self):
         return self.message
 
+
+class NoSingleArticles(exceptions.ObjectDoesNotExist, CustomException):
+    message = 'Single Article with this name does not exist'
+    errorBlock = 'single article getter'
+
+    def __str__(self):
+        return self.message
 
 class Shit(CustomException):
     message = "catch base exception"
