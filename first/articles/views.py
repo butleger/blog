@@ -61,6 +61,25 @@ class ArticleView(BaseBlogView):
         'comment_form': comment_form(),
     }
 
+    def post(self, request, *args, **kwargs):
+        print('args = ', *args)
+        print('kwargs = ', kwargs)
+        commentForm = AddCommentForm(request.POST)
+        if commentForm.is_valid():
+            try:
+                article = getArticleById(kwargs['articleId'])
+            except :
+                return HttpResponseRedirect('/articles/' + str(kwargs['articleId']))
+            comment = CommentModel()
+            comment.article = article
+            comment.author = request.POST.get('author')
+            comment.text = request.POST.get('text')
+            comment.date = datetime.datetime.now()
+            comment.save()
+        else:
+            render(request, "all_fucked.html")
+        return HttpResponseRedirect('/articles/' + str(kwargs['articleId']))
+
     #added more context that depends from url in setup
     def get_context_data(self, **kwargs):
         self.extra_context.update(article=self.article)
@@ -70,6 +89,19 @@ class ArticleView(BaseBlogView):
     def setup(self, request, *args, **kwargs):
         self.article = getArticleById(int(kwargs['articleId']))
         return super().setup(request, *args, **kwargs)
+
+
+class LikeAdder(BaseAjaxWorker):
+    request_arg_names = ['id']
+
+    def request_callback(self):
+        try:
+            comment = getCommentById(self.request_data['id'])
+        except:
+            self.status = 404
+        else:
+            comment.likes += 1
+            comment.save()
 
 
 def addLike(request, id):
@@ -107,7 +139,6 @@ def sendArticle(request, articleId):
                                             'menu': menu,
                                             'comment_form': AddCommentForm(),
                                             'footer': footer})
-
 
 
 def add_comment(request, id):

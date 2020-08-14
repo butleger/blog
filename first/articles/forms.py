@@ -8,8 +8,11 @@ class AddArticleForm(forms.Form):
 
 class AddCommentForm(forms.Form):
     author = forms.CharField(max_length=20, required=False)
-    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'comment_input',
-                                                        'rows' : 3}))
+    text = forms.CharField(widget=forms.Textarea(attrs={
+                                                        'rows': 3,
+                                                        'class': 'comment_input',
+                                                        }))
+
 
 class CreateUserForm(forms.Form):
     password1 = forms.CharField(max_length=20,
