@@ -6,27 +6,7 @@ from .forms import AddArticleForm, AddCommentForm
 from django.utils.decorators import classonlymethod
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse, HttpResponseRedirect
-
-
-class BaseAjaxWorker(TemplateView):
-    response_class = HttpResponse
-    data = 'unused data'
-
-    def post(self):
-        return HttpResponse(self.data)
-
-class BaseBlogView(TemplateView):
-    #should define template_name in next classes
-    template_name = 'navigate_menu\\articles.html'
-    base_context = {
-        'footer': getFooter(),
-        'menu': getMenu(),
-    }
-
-    def get_context_data(self, **kwargs):
-        if self.base_context is not None:
-            self.extra_context.update(**self.base_context)
-        return super().get_context_data(**kwargs)
+from .base import BaseBlogView, BaseAjaxWorker
 
 
 class ArticlesView(BaseBlogView):
@@ -157,6 +137,3 @@ def badRedirect(request):
 def shouldBeLogged(request):
     return render(request, 'should_logging.html')
 
-
-
-# Create your views here.
