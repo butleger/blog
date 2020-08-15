@@ -6,9 +6,13 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic import TemplateView
 from django.urls import reverse
+from .forms import AuthWithRememberingSession
 
 
 class MyLoginView(LoginView):
+    #form should have field 'remember_me'
+    #if form have not remove post function in this class
+    form_class = AuthWithRememberingSession
     success_redirect_template = 'accounts:success_login'
     template_name = 'registration\\login.html'
     extra_context = {
@@ -18,6 +22,15 @@ class MyLoginView(LoginView):
 
     def get_redirect_url(self):
         return reverse(self.success_redirect_template)
+
+    def post(self, request, *args, **kwargs):
+        print('this is post function in LOGINVIEW and request.POST = ' + str(request.POST))
+        if request.POST.get('remember_me', 'No') == 'No':
+            #if user dont ask to remember him
+            request.session.set_expiry(0)#close session when browser will be ended
+        return super().post(request,*args, **kwargs)
+
+
 
 
 class MySuccessLoginView(TemplateView):
